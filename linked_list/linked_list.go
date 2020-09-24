@@ -1,6 +1,6 @@
 package linkedlist
 
-// LinkedList Represnets the interface to access the linkedList elements
+// LinkedList Represents the interface to access the linkedList elements
 type LinkedList interface {
 	Size() int64
 	Empty() bool
