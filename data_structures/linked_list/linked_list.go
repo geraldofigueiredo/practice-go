@@ -4,8 +4,9 @@ import "fmt"
 
 // LinkedList Represents the interface to access the linkedList elements
 type LinkedList interface {
-	Size() int64
+	Size() uint64
 	Empty() bool
+	ValueAt(index uint64) (int64, error)
 	PushBack(element *ListElement)
 	PushFront(element *ListElement)
 	Front() *ListElement
@@ -21,15 +22,25 @@ func NewEmptyLinkedList() LinkedList {
 type linkedList struct {
 	head *ListElement
 	tail *ListElement
-	size int64
+	size uint64
 }
 
-func (list *linkedList) Size() int64 {
+func (list *linkedList) Size() uint64 {
 	return list.size
 }
 
 func (list *linkedList) Empty() bool {
 	return list.size == 0
+}
+
+func (list *linkedList) ValueAt(index uint64) (int64, error) {
+	if err := list.validIndex(index); err != nil {
+		return 0, err
+	}
+
+	node := list.elementAt(index)
+
+	return node.GetValue(), nil
 }
 
 func (list *linkedList) PushBack(element *ListElement) {
@@ -84,4 +95,34 @@ func (list *linkedList) Print() {
 		count++
 	}
 	fmt.Println()
+}
+
+func (list *linkedList) validIndex(index uint64) error {
+	// list index between: [0, list.size - 1]
+	if index >= list.size {
+		return fmt.Errorf("index out of bounds")
+	}
+
+	return nil
+}
+
+func (list *linkedList) elementAt(index uint64) *ListElement {
+	// last element (tail)
+	if index == list.size-1 {
+		return list.tail
+	}
+
+	// scroll through linked list, including the head case
+	node := list.head
+	var position uint64 = 0
+	for node != nil {
+		if position == index {
+			break
+		}
+
+		node = node.GetNext()
+		position++
+	}
+
+	return node
 }

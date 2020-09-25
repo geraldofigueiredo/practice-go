@@ -18,7 +18,7 @@ func TestSize(t *testing.T) {
 	tests := []struct {
 		name              string
 		numElementsToPush int64
-		realListSize      int64
+		realListSize      uint64
 	}{
 		{"empty size", 0, 0},
 		{"1 element", 1, 1},
@@ -39,7 +39,7 @@ func TestSize(t *testing.T) {
 				t.Errorf("[Linked List] Size, got %d want %d", list.Size(), tt.realListSize)
 			}
 
-			var count int64 = 0
+			var count uint64 = 0
 			var node *ListElement = list.Front()
 			for node != nil {
 				node = node.GetNext()
@@ -80,11 +80,51 @@ func TestEmpty(t *testing.T) {
 	}
 }
 
+func TestValueAt(t *testing.T) {
+	list := NewEmptyLinkedList()
+	listSize := 5
+	for i := 0; i < listSize; i++ {
+		list.PushBack(NewListElement(int64(i), nil))
+	}
+
+	tests := []struct {
+		name         string
+		index        uint64
+		valueAtIndex int64
+		wantError    bool
+	}{
+		{"head index", 0, list.Front().GetValue(), false},
+		{"tail index", list.Size() - 1, list.Back().GetValue(), false},
+		{"index 1", 1, list.Front().GetNext().GetValue(), false},
+		{"index 2", 2, list.Front().GetNext().GetNext().GetValue(), false},
+		{"index 3", 3, list.Front().GetNext().GetNext().GetNext().GetValue(), false},
+		{"out of index", list.Size() + 1, 0, true},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			value, err := list.ValueAt(tt.index)
+
+			if tt.wantError && err == nil {
+				t.Errorf("[Linked List] ValueAt err, got %v wantError? %v", err, tt.wantError)
+			}
+
+			if !tt.wantError && err != nil {
+				t.Errorf("[Linked List] ValueAt err, got %v wantError? %v", err, tt.wantError)
+			}
+
+			if value != tt.valueAtIndex {
+				t.Errorf("[Linked List] ValueAt value, got %d want %d", value, tt.valueAtIndex)
+			}
+		})
+	}
+}
+
 func TestPushBack(t *testing.T) {
 	tests := []struct {
 		name        string
 		numElements int
-		listSize    int64
+		listSize    uint64
 	}{
 		{"nil PushBack", 0, 0},
 		{"1 PushBack", 1, 1},
@@ -110,7 +150,7 @@ func TestPushBack(t *testing.T) {
 				t.Errorf("[Linked List] PushBack, List Back %v want %v", list.Back(), lastElement)
 			}
 
-			var countElements int64 = 0
+			var countElements uint64 = 0
 			node := list.Front()
 			for node != nil {
 				node = node.GetNext()
@@ -128,7 +168,7 @@ func TestPushFront(t *testing.T) {
 	tests := []struct {
 		name        string
 		numElements int64
-		listSize    int64
+		listSize    uint64
 	}{
 		{"nil PushFront", 0, 0},
 		{"1 PushFront", 1, 1},
@@ -155,7 +195,7 @@ func TestPushFront(t *testing.T) {
 				t.Errorf("[Linked List] PushFront, List Front %v want %v", list.Front(), lastElementInserted)
 			}
 
-			var countElements int64 = 0
+			var countElements uint64 = 0
 			node := list.Front()
 			for node != nil {
 				node = node.GetNext()
