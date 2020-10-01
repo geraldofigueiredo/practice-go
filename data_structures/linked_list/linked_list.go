@@ -14,7 +14,7 @@ type LinkedList interface {
 	PushFront(element *ListElement)
 	PopFront() *ListElement
 	PushBack(element *ListElement)
-	// PopBack() *ListElement
+	PopBack() *ListElement
 	Front() *ListElement
 	Back() *ListElement
 	InsertAt(element *ListElement, index uint64) error
@@ -69,6 +69,24 @@ func (list *linkedList) PushBack(element *ListElement) {
 	list.tail.SetNext(element)
 	list.tail = element
 	list.size++
+}
+
+func (list *linkedList) PopBack() *ListElement {
+	if list.tail == nil {
+		return nil
+	}
+
+	var element *ListElement = list.head
+	var previous *ListElement = nil
+	for element != list.tail {
+		previous = element
+		element = element.GetNext()
+	}
+
+	list.tail = previous
+	list.size--
+
+	return element
 }
 
 func (list *linkedList) PushFront(element *ListElement) {
