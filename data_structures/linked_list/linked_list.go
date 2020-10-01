@@ -88,6 +88,18 @@ func (list *linkedList) PushFront(element *ListElement) {
 	list.size++
 }
 
+func (list *linkedList) PopFront() *ListElement {
+	if list.head == nil {
+		return nil
+	}
+
+	element := list.head
+	list.head = list.head.GetNext()
+	list.size--
+
+	return element
+}
+
 func (list *linkedList) InsertAt(element *ListElement, index uint64) error {
 	if element == nil {
 		return errors.New("nil element")
