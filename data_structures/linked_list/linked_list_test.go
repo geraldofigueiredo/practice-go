@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// TODO list creation outsides the intern test function
+
 func TestNewEmptyLinkedList(t *testing.T) {
 	got := NewEmptyLinkedList()
 	want := &linkedList{}
@@ -105,11 +107,7 @@ func TestValueAt(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			value, err := list.ValueAt(tt.index)
 
-			if tt.wantError && err == nil {
-				t.Errorf("[Linked List] ValueAt err, got %v wantError? %v", err, tt.wantError)
-			}
-
-			if !tt.wantError && err != nil {
+			if (tt.wantError && err == nil) || (!tt.wantError && err != nil) {
 				t.Errorf("[Linked List] ValueAt err, got %v wantError? %v", err, tt.wantError)
 			}
 
@@ -204,6 +202,43 @@ func TestPushFront(t *testing.T) {
 
 			if countElements != list.Size() {
 				t.Errorf("[Linked List] PushFront, Count elements %d want %d", countElements, tt.listSize)
+			}
+		})
+	}
+}
+
+func TestInsertAt(t *testing.T) {
+	list := NewEmptyLinkedList()
+	listSize := 5
+	for i := 0; i < listSize; i++ {
+		list.PushBack(NewListElement(int64(i), nil))
+	}
+
+	tests := []struct {
+		name            string
+		elementToInsert *ListElement
+		index           uint64
+		wantError       bool
+	}{
+		{"error, index > size", nil, list.Size() + 1, true},
+		{"insert at head", NewListElement(2222, nil), 0, false},
+		{"insert at tail", NewListElement(3333, nil), list.Size() - 1, false},
+		{"middle insertion", NewListElement(9999, nil), (list.Size() - 1) / 2, false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			listTest := NewEmptyLinkedList()
+
+			err := listTest.InsertAt(tt.elementToInsert, tt.index)
+
+			if (tt.wantError && err == nil) || (!tt.wantError && err != nil) {
+				t.Errorf("[Linked List] InsertAt, got %v wantErr? %v", tt.wantError, err)
+				return
+			}
+
+			if equal := reflect.DeepEqual(list.ElementAt(tt.index), tt.elementToInsert); !equal {
+				t.Errorf("[Linked List] InsertAt, got %v want %v", listTest.ElementAt(tt.index), tt.elementToInsert)
 			}
 		})
 	}
