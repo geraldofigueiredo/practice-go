@@ -21,7 +21,7 @@ type LinkedList interface {
 	// Erase(index uint64)
 	// ValueAtFromEnd(index uint64) int64
 	// Reverse()
-	// RemoveValue(value int64)
+	RemoveValue(value int64) error
 	Print()
 }
 
@@ -185,6 +185,27 @@ func (list *linkedList) validIndex(index uint64) error {
 		return fmt.Errorf("index out of bounds")
 	}
 
+	return nil
+}
+
+func (list *linkedList) RemoveValue(value int64) error {
+	if list.head == nil {
+		return fmt.Errorf("empty List")
+	}
+
+	var element *ListElement = list.head
+	var previous *ListElement = nil
+	for element == nil || element.GetValue() != value {
+		previous = element
+		element = element.GetNext()
+	}
+
+	if element == nil {
+		return fmt.Errorf("value not found")
+	}
+
+	previous = element.GetNext()
+	list.size--
 	return nil
 }
 
