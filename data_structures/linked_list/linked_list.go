@@ -18,7 +18,7 @@ type LinkedList interface {
 	Front() *ListElement
 	Back() *ListElement
 	InsertAt(element *ListElement, index uint64) error
-	// Erase(index uint64)
+	Erase(index uint64) error
 	// ValueAtFromEnd(index uint64) int64
 	// Reverse()
 	RemoveValue(value int64) error
@@ -135,6 +135,29 @@ func (list *linkedList) InsertAt(element *ListElement, index uint64) error {
 		list.PushBack(element)
 	}
 
+	return nil
+}
+
+func (list *linkedList) Erase(index uint64) error {
+	if list.head == nil {
+		return fmt.Errorf("empty List")
+	}
+
+	var element *ListElement = list.head
+	var previous *ListElement = nil
+	var count uint64 = 0
+	for count != index && count <= list.size {
+		previous = element
+		element = element.GetNext()
+		count++
+	}
+
+	if element == nil {
+		return fmt.Errorf("value not found")
+	}
+
+	previous = element.GetNext()
+	list.size--
 	return nil
 }
 
