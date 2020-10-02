@@ -27,7 +27,7 @@ go build bin/practice-go
 
 ## Data Structures
 
-- [ ] Linked list
+- [ ] Linked list (in progress)
 - [ ] Stack
 - [ ] Queue
 - [ ] Hash table
