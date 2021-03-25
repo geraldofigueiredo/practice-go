@@ -1,4 +1,4 @@
-module github.com/geraldofigueiredo/practice-go/gRPC/micro-restaurant
+module github.com/geraldofigueiredo/micro-restaurant
 
 go 1.16
 
