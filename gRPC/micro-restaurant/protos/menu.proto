@@ -1,0 +1,18 @@
+syntax = "proto3";
+package menu;
+
+option go_package = "./";
+
+service MenuService {
+	rpc GetItemInfo(ItemRequest) returns (ItemResponse);
+}
+
+message ItemRequest {
+	string id = 1;
+}
+
+message ItemResponse {
+	string id = 1;
+	string name = 2;
+	float price = 3;
+}
