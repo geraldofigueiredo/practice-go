@@ -12,5 +12,5 @@ func Ping(c *gin.Context) {
 	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 	}
-	c.String(http.StatusOK, result+"\n")
+	c.String(http.StatusOK, result)
 }
