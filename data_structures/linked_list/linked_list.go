@@ -138,26 +138,27 @@ func (list *linkedList) InsertAt(element *ListElement, index uint64) error {
 	return nil
 }
 
+// TODO: Fix erase method
 func (list *linkedList) Erase(index uint64) error {
-	if list.head == nil {
-		return fmt.Errorf("empty List")
-	}
+	// if list.head == nil {
+	// 	return fmt.Errorf("empty List")
+	// }
 
-	var element *ListElement = list.head
-	var previous *ListElement = nil
-	var count uint64 = 0
-	for count != index && count <= list.size {
-		previous = element
-		element = element.GetNext()
-		count++
-	}
+	// var element *ListElement = list.head
+	// var previous *ListElement = nil
+	// var count uint64 = 0
+	// for count != index && count <= list.size {
+	// 	previous = element
+	// 	element = element.GetNext()
+	// 	count++
+	// }
 
-	if element == nil {
-		return fmt.Errorf("value not found")
-	}
+	// if element == nil {
+	// 	return fmt.Errorf("value not found")
+	// }
 
-	previous = element.GetNext()
-	list.size--
+	// previous = element.GetNext()
+	// list.size--
 	return nil
 }
 
@@ -211,24 +212,25 @@ func (list *linkedList) validIndex(index uint64) error {
 	return nil
 }
 
+// TODO: Fix remove value method
 func (list *linkedList) RemoveValue(value int64) error {
-	if list.head == nil {
-		return fmt.Errorf("empty List")
-	}
+	// if list.head == nil {
+	// 	return fmt.Errorf("empty List")
+	// }
 
-	var element *ListElement = list.head
-	var previous *ListElement = nil
-	for element == nil || element.GetValue() != value {
-		previous = element
-		element = element.GetNext()
-	}
+	// var element *ListElement = list.head
+	// var previous *ListElement = nil
+	// for element == nil || element.GetValue() != value {
+	// 	previous = element
+	// 	element = element.GetNext()
+	// }
 
-	if element == nil {
-		return fmt.Errorf("value not found")
-	}
+	// if element == nil {
+	// 	return fmt.Errorf("value not found")
+	// }
 
-	previous = element.GetNext()
-	list.size--
+	// previous = element.GetNext()
+	// list.size--
 	return nil
 }
 
