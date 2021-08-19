@@ -37,6 +37,13 @@ func (v vector) Capacity() int {
 	return v.capacity
 }
 
+func (v vector) GetValueAt(index int) (int, error) {
+	if index < 0 || index > v.size-1 {
+		return 0, errors.New("invalid index")
+	}
+	return v.data[index], nil
+}
+
 // Aux methods
 func max(a, b int) int {
 	if a > b {
