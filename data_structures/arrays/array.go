@@ -20,12 +20,16 @@ func NewVector(capacity int) (VectorInterface, error) {
 		return vector{}, errors.New("invalid capacity")
 	}
 
-	vec := vector{}
+	vec := vector{
+		capacity: minCapacity,
+		size:     0,
+	}
 
-	vec.capacity = max(minCapacity, capacity)
-	vec.size = 0
+	for vec.capacity < capacity {
+		vec.capacity *= kGrowth
+	}
+
 	vec.data = make([]int, vec.capacity)
-
 	return vec, nil
 }
 
