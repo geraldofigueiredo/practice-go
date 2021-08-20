@@ -17,7 +17,8 @@ func TestNewVector(t *testing.T) {
 	}{
 		{"invalid capacity", args{capacity: 0}, vector{}, true},
 		{"min capacity", args{capacity: 1}, vector{capacity: 16, size: 0, data: make([]int, 16)}, false},
-		// {"capacity multiplied by growth rate", args{capacity: 20}, vector{capacity: 32, size: 0, data: make([]int, 32)}, false},
+		{"capacity multiplied by growth rate (32)", args{capacity: 17}, vector{capacity: 32, size: 0, data: make([]int, 32)}, false},
+		{"capacity multiplied by growth rate (64)", args{capacity: 33}, vector{capacity: 64, size: 0, data: make([]int, 32)}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
