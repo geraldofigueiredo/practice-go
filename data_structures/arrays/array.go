@@ -42,10 +42,17 @@ func (v vector) Capacity() int {
 }
 
 func (v vector) GetValueAt(index int) (int, error) {
-	if index < 0 || index > v.size-1 {
-		return 0, errors.New("invalid index")
+	if err := v.validateIndex(index); err != nil {
+		return 0, err
 	}
 	return v.data[index], nil
+}
+
+func (v vector) validateIndex(index int) error {
+	if index < 0 || index > v.size-1 {
+		return errors.New("invalid index")
+	}
+	return nil
 }
 
 // Aux methods
