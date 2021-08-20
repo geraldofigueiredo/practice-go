@@ -54,11 +54,3 @@ func (v vector) validateIndex(index int) error {
 	}
 	return nil
 }
-
-// Aux methods
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
