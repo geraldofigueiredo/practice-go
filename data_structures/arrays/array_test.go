@@ -80,3 +80,31 @@ func Test_vector_GetValueAt(t *testing.T) {
 		})
 	}
 }
+
+func Test_vector_Len(t *testing.T) {
+	type fields struct {
+		size     int
+		capacity int
+		data     []int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{name: "len = 0", fields: fields{size: 0}, want: 0},
+		{name: "len = 1", fields: fields{size: 1}, want: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			v := vector{
+				size:     tt.fields.size,
+				capacity: tt.fields.capacity,
+				data:     tt.fields.data,
+			}
+			if got := v.Len(); got != tt.want {
+				t.Errorf("vector.Len() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
