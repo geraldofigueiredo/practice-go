@@ -5,6 +5,7 @@
 - [Practice Go](#practice-go)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [STD (standard library)](#std-standard-library)
   - [Data Structures](#data-structures)
 
 
@@ -23,11 +24,21 @@ go build bin/practice-go
 
 ./bin/practice-go
 ```
+## STD (standard library)
 
+Some studies and implementation of the concepts listed below:
+
+- [x] Gargabe Collection
+- [x] Go Compiler
+- [x] Goroutines
+- [x] Channels
+- [x] IO
+- [x] Testing
 
 ## Data Structures
 
-- [ ] Linked list (in progress)
+- [ ] Dynamic Array (vector) - WIP
+- [ ] Linked list
 - [ ] Stack
 - [ ] Queue
 - [ ] Hash table
