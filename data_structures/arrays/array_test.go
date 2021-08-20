@@ -108,3 +108,31 @@ func Test_vector_Len(t *testing.T) {
 		})
 	}
 }
+
+func Test_vector_Capacity(t *testing.T) {
+	type fields struct {
+		size     int
+		capacity int
+		data     []int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{name: "capacity = 0", fields: fields{capacity: 0}, want: 0},
+		{name: "capacity = 1", fields: fields{capacity: 1}, want: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			v := vector{
+				size:     tt.fields.size,
+				capacity: tt.fields.capacity,
+				data:     tt.fields.data,
+			}
+			if got := v.Capacity(); got != tt.want {
+				t.Errorf("vector.Capacity() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
