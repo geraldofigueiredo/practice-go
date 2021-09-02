@@ -54,3 +54,15 @@ func (v vector) validateIndex(index int) error {
 	}
 	return nil
 }
+
+func (v vector) Push(data int) error {
+	// TODO: Resize slice and realocate data
+	if v.size == v.capacity {
+
+	}
+
+	lastPosition := v.size
+	v.data[lastPosition] = data
+	v.size++
+	return nil
+}
