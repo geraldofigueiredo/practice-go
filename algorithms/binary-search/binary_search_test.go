@@ -15,10 +15,10 @@ func TestBinarySearch(t *testing.T) {
 		wantPosition      int
 		wantNumOperations int
 	}{
-		{"one arr", args{[]int{1}, 1}, 0, 1},
-		{"empty arr", args{[]int{}, 1}, 0, 0},
-		{"best case", args{[]int{1, 3, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}, 13}, 7, 1},
-		{"worst case", args{[]int{1, 3, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}, 1}, 0, 4},
+		// {"one arr", args{generateOrderedArr(1), 1}, 0, 1},
+		// {"empty arr", args{generateOrderedArr(0), 1}, 0, 0},
+		{"best case", args{generateOrderedArr(15), 7}, 7, 1},
+		{"worst case", args{generateOrderedArr(15), 0}, 0, 4},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -31,4 +31,13 @@ func TestBinarySearch(t *testing.T) {
 			}
 		})
 	}
+}
+
+func generateOrderedArr(size int) []int {
+	arr := make([]int, size)
+	for i := range arr {
+		arr[i] = i
+	}
+
+	return arr
 }
