@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func BinarySearch(arr []int, search int) (position, numOperations int) {
+func BinarySearch(arr []int, search int, debug bool) (position, numOperations int) {
 	low := 0
 	high := len(arr) - 1
 	numOperations = 0
@@ -11,7 +11,11 @@ func BinarySearch(arr []int, search int) (position, numOperations int) {
 		numOperations++
 		mid := (low + high) / 2
 		guess := arr[mid]
-		VisualizeBinarySearch(arr, low, high, mid)
+
+		if debug {
+			VisualizeBinarySearch(arr, low, high, mid)
+		}
+
 		if guess == search {
 			return mid, numOperations
 		}
