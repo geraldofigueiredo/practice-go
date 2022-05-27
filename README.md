@@ -42,3 +42,8 @@ Some studies and implementation of the concepts listed below:
 - [ ] Stack
 - [ ] Queue
 - [ ] Hash table
+
+## Architecture
+
+* Distributed systems
+- [x] RabbitMQ
