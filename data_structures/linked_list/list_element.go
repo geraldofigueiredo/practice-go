@@ -1,40 +1,40 @@
 package linkedlist
 
 // ListElement Represents the element that makes up the list
-type ListElement struct {
-	value int64
-	next  *ListElement
+type ListElement[T comparable] struct {
+	data T
+	next *ListElement[T]
 }
 
 // NewEmptyListElement Creates a empty element
-func NewEmptyListElement() *ListElement {
-	return &ListElement{}
+func NewEmptyListElement[T comparable]() *ListElement[T] {
+	return &ListElement[T]{}
 }
 
 // NewListElement Creates an element with a value stored
-func NewListElement(value int64, next *ListElement) *ListElement {
-	return &ListElement{
-		value: value,
-		next:  next,
+func NewListElement[T comparable](value T, next *ListElement[T]) *ListElement[T] {
+	return &ListElement[T]{
+		data: value,
+		next: next,
 	}
 }
 
-// SetValue Update the value stored in the object
-func (element *ListElement) SetValue(value int64) {
-	element.value = value
+// SetValue Update the data stored in the object
+func (element *ListElement[T]) SetValue(data T) {
+	element.data = data
 }
 
-// GetValue Returns the value stored in the object
-func (element *ListElement) GetValue() int64 {
-	return element.value
+// GetValue Returns the data stored in the object
+func (element *ListElement[T]) GetValue() T {
+	return element.data
 }
 
 // SetNext Update the element pointed
-func (element *ListElement) SetNext(next *ListElement) {
+func (element *ListElement[T]) SetNext(next *ListElement[T]) {
 	element.next = next
 }
 
 // GetNext Gets the element pointed
-func (element *ListElement) GetNext() *ListElement {
+func (element *ListElement[T]) GetNext() *ListElement[T] {
 	return element.next
 }
