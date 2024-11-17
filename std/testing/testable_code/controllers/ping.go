@@ -8,9 +8,6 @@ import (
 )
 
 func Ping(c *gin.Context) {
-	result, err := services.PingService.HandlePing()
-	if err != nil {
-		c.String(http.StatusInternalServerError, err.Error())
-	}
+	result := services.HandlePing()
 	c.String(http.StatusOK, result)
 }
